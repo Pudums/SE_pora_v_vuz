@@ -17,18 +17,13 @@ from django.urls import re_path, path
 from rest_framework.routers import SimpleRouter
 from django.conf.urls import include
 from SOP.views import ApiViewSet
-from django.views.generic import TemplateView
+
+from SOP.models.models import User
+
 router = SimpleRouter()
-router.register('api', ApiViewSet, basename='api')
-from django.shortcuts import render
-
-
-def aboba(request):
-    return render(request, 'templates/index.html')
+router.register('homeworks', ApiViewSet, basename='homeworks')
 
 
 urlpatterns = [
-    # re_path('hello/', include(router.urls)),
-    # path("init/", TemplateView.as_view(template_name="index.html"))
-    path('', aboba)
+    re_path('', include(router.urls))
 ]
