@@ -13,9 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
+from django.urls import re_path, path
+from rest_framework.routers import SimpleRouter
+from django.conf.urls import include
+from SOP.views import ApiViewSet
+from django.views.generic import TemplateView
+router = SimpleRouter()
+router.register('api', ApiViewSet, basename='api')
+from django.shortcuts import render
+
+
+def aboba(request):
+    return render(request, 'templates/index.html')
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # re_path('hello/', include(router.urls)),
+    # path("init/", TemplateView.as_view(template_name="index.html"))
+    path('', aboba)
 ]
